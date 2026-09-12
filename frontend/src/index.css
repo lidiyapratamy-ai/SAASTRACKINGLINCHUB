@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #FAF6EE;
+  --cream-2: #F3EEDF;
+  --cream-3: #E9E1CD;
+  --ink: #1B1B1F;
+  --ink-2: #3A3A3F;
+  --ink-3: #6B6B6F;
+  --line: #D9D2BF;
+  --emerald: #2F6F5E;
+  --emerald-soft: #C8DBD2;
+  --clay: #B36A4A;
+  --amber: #B58900;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.font-serif-editorial {
+  font-family: 'Fraunces', ui-serif, Georgia, serif;
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+}
+
+.font-mono-ed {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Selection */
+::selection { background: var(--ink); color: var(--cream); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-3); }
+
+@layer base {
+    :root {
+        --background: 44 48% 95%;
+        --foreground: 240 4% 11%;
+        --card: 44 48% 97%;
+        --card-foreground: 240 4% 11%;
+        --popover: 44 48% 97%;
+        --popover-foreground: 240 4% 11%;
+        --primary: 240 4% 11%;
+        --primary-foreground: 44 48% 97%;
+        --secondary: 44 32% 90%;
+        --secondary-foreground: 240 4% 11%;
+        --muted: 44 32% 90%;
+        --muted-foreground: 240 3% 42%;
+        --accent: 165 40% 31%;
+        --accent-foreground: 44 48% 97%;
+        --destructive: 8 62% 47%;
+        --destructive-foreground: 44 48% 97%;
+        --border: 40 25% 80%;
+        --input: 40 25% 82%;
+        --ring: 240 4% 11%;
+        --chart-1: 165 40% 31%;
+        --chart-2: 20 50% 46%;
+        --chart-3: 240 4% 11%;
+        --chart-4: 39 68% 46%;
+        --chart-5: 240 3% 42%;
+        --radius: 0.375rem;
+    }
+}
+
+@layer base {
+    * { @apply border-border; }
+    body { background: var(--cream); color: var(--ink); }
+}
+
+/* Editorial eyebrow */
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.hairline { border-color: var(--line); }
+.ink-divider { background: var(--ink); height: 1px; }
+
+/* Ticker underline */
+.link-quiet {
+  position: relative;
+  transition: color .18s ease;
+}
+.link-quiet::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px; height: 1px; width: 100%;
+  background: currentColor; transform: scaleX(0); transform-origin: right;
+  transition: transform .3s cubic-bezier(.22,.61,.36,1);
+}
+.link-quiet:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* Pill */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border: 1px solid var(--line);
+  border-radius: 999px; font-size: 11px; letter-spacing: .06em;
+  text-transform: uppercase; font-family: 'JetBrains Mono', monospace;
+  background: var(--cream);
+}
+
+/* Card */
+.paper {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.paper-2 { background: var(--cream-2); border: 1px solid var(--line); border-radius: 6px; }
+
+/* Kanban column divider */
+.kanban-col { border-right: 1px solid var(--line); }
+.kanban-col:last-child { border-right: 0; }
+
+/* Grain */
+.grain::before {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(27,27,31,0.05) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply; opacity: .35;
+}
+
+/* Small fade-in stagger */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.fade-up { animation: fadeUp .5s ease both; }
+
+/* Nav dropdown chevron rotate */
+.chev-open { transform: rotate(180deg); transition: transform .2s; }
+.chev { transition: transform .2s; }
