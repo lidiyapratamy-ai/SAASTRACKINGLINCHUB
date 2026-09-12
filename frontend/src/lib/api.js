@@ -5,8 +5,7 @@ export const API = `${BACKEND_URL}/api`;
 
 export const api = axios.create({
   baseURL: API,
-  withCredentials: true,
-});
+ });
 
 api.interceptors.request.use((config) => {
   const t = localStorage.getItem("linchub_token");
