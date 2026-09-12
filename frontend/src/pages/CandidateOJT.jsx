@@ -28,6 +28,7 @@ export default function CandidateOJT() {
 
   const setStatus = async (c, status) => { try { await api.put(`/candidates/${c.id}`, { ...c, ojt_status: status }); load(); } catch (e) { toast.error(formatApiError(e)); } };
   const promote = async (c) => { try { await api.put(`/candidates/${c.id}`, { ...c, stage: "PKWT", pkwt_start: new Date().toISOString().slice(0, 10), pkwt_end: new Date(Date.now() + 30 * 86400000).toISOString().slice(0, 10) }); toast.success("Promosi ke PKWT"); load(); } catch (e) { toast.error(formatApiError(e)); } };
+  const del = async (id) => { if (!confirm("Hapus kandidat ini?")) return; try { await api.delete(`/candidates/${id}`); toast.success("Terhapus"); load(); } catch (e) { toast.error(formatApiError(e)); } };
 
   return (
     <div>
@@ -68,6 +69,7 @@ export default function CandidateOJT() {
                 <div className="col-span-2 flex justify-end gap-2">
                   <button onClick={() => setDrawer(c)} className="text-[11px] font-mono-ed uppercase tracking-widest link-quiet">Customize</button>
                   <button onClick={() => promote(c)} className="text-[11px] font-mono-ed uppercase tracking-widest link-quiet">→ PKWT</button>
+                  <button onClick={() => del(c.id)} className="text-[11px] font-mono-ed uppercase tracking-widest link-quiet text-[color:var(--destructive)]">Hapus</button>
                 </div>
               </div>
             );

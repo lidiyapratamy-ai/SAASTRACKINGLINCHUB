@@ -42,6 +42,12 @@ export default function CandidateInterview() {
     } catch (e) { toast.error(formatApiError(e)); }
   };
 
+  const del = async (id) => {
+    if (!confirm("Hapus kandidat ini?")) return;
+    try { await api.delete(`/candidates/${id}`); toast.success("Terhapus"); load(); }
+    catch (e) { toast.error(formatApiError(e)); }
+  };
+
   return (
     <div>
       <div className="flex items-end justify-between mb-8">
@@ -73,6 +79,7 @@ export default function CandidateInterview() {
               <div className="col-span-2 flex justify-end gap-2">
                 <button onClick={() => moveStage(c, "OJT")} className="text-[11px] font-mono-ed uppercase tracking-widest link-quiet">→ OJT</button>
                 <button onClick={() => { setEditing(c.id); setForm({ ...empty, ...c }); setShow(true); }} className="text-[11px] font-mono-ed uppercase tracking-widest link-quiet">Edit</button>
+                <button onClick={() => del(c.id)} className="text-[11px] font-mono-ed uppercase tracking-widest link-quiet text-[color:var(--destructive)]">Hapus</button>
               </div>
             </div>
           ))}

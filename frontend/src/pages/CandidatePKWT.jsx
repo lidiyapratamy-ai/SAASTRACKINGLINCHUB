@@ -20,6 +20,8 @@ export default function CandidatePKWT() {
     catch (e) { toast.error(formatApiError(e)); }
   };
 
+  const del = async (id) => { if (!confirm("Hapus kandidat ini?")) return; try { await api.delete(`/candidates/${id}`); toast.success("Terhapus"); load(); } catch (e) { toast.error(formatApiError(e)); } };
+
   return (
     <div>
       <div className="eyebrow mb-2">Candidate · PKWT & Offering · Contract Offering & Hired</div>
@@ -55,6 +57,7 @@ export default function CandidatePKWT() {
                     <option>Hired PKWT</option><option>Extended</option><option>Terminated</option>
                   </select>
                   <button onClick={() => setDrawer(c)} className="text-[11px] font-mono-ed uppercase tracking-widest link-quiet">Customize</button>
+                  <button onClick={() => del(c.id)} className="text-[11px] font-mono-ed uppercase tracking-widest link-quiet text-[color:var(--destructive)]">Hapus</button>
                 </div>
               </div>
             );
